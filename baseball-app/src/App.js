@@ -3,6 +3,9 @@ import logo from './logo.svg';
 import './App.css';
 import PropTypes from 'prop-types';
 import Dashboard from './components/Dashboard'
+import Display from './components/Display'
+
+const addOne = num => num + 1
 
 class App extends React.Component {
   constructor(){
@@ -12,31 +15,36 @@ class App extends React.Component {
         ball:0,
         foul:0,
         hit:0
-
     }
 }
+
+
+
+resetDetails = () =>{
+    return (this.setState({
+        strike:0,
+        ball:0,
+        foul:0,
+        hit:0
+    }))
+}
+
 callBall=()=>{
-    if(this.state.ball<=3){
-        return  this.setState({ball:this.state.ball+1})
-    }else{
-        return this.state.ball
-    }
+
+    this.state.ball <3 ? this.setState({ball:addOne(this.state.ball)}):this.resetDetails();
+    
 }
 callStrike=()=>{
-  console.log(this)
-    if(this.state.strike<=2){
-        return this.setState({strike:this.state.strike+1})
-    }else{
-        return this.state.strike
-    }
+    this.state.strike <2 ? this.setState({strike:addOne(this.state.strike)}):this.resetDetails();
 
 }
 callFoul=()=>{
-if(this.state.strike<=2){
-    return this.setState({strike:this.state.strike+1})
+if(this.state.strike<2){
+    return this.setState({strike:addOne(this.state.strike)})
 }else{
-    return this.setState({foul:this.state.foul+1})
+    return this.setState({foul:addOne(this.state.foul)})
 }}
+
 
 
 // componentWillMount() {
@@ -72,7 +80,8 @@ render(){
     return(
         <div>
             <h1>Hello</h1>
-            <Dashboard strike={this.state.strike} strikeClick={this.callStrike}/>
+            <Display strike={this.state.strike} ball={this.state.ball}/>
+            <Dashboard ballClick={this.callBall} strikeClick={this.callStrike} hit={this.resetDetails} foul={this.callFoul}/>
         </div>
     )
 }
@@ -80,3 +89,4 @@ render(){
 
 
 export default App;
+{/* <Display strike={this.state.strike} ball={this.state.ball}/> */}

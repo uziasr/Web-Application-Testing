@@ -2,10 +2,11 @@ import React from 'react';
 
 function Display(props) {
     return (
-        <div>
-            
-        </div>
+        <>
+            <p>{props.strike}</p>
+            <p>{props.ball}</p>
+        </>
     );
 }
 
-export default {Display}
+export default Display
