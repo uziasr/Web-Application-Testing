@@ -4,8 +4,18 @@ import './App.css';
 import PropTypes from 'prop-types';
 import Dashboard from './components/Dashboard'
 import Display from './components/Display'
+import styled from 'styled-components'
 
-const addOne = num => num + 1
+const Game = styled.div`
+display:flex;
+justify-content:center;
+flex-direction: column;
+align-items:center;
+align-content:center;
+
+`
+
+export const addOne = num => num + 1
 
 class App extends React.Component {
   constructor(){
@@ -79,9 +89,11 @@ render(){
   console.log(this.state.strike)
     return(
         <div>
-            <h1>Hello</h1>
-            <Display strike={this.state.strike} ball={this.state.ball}/>
-            <Dashboard ballClick={this.callBall} strikeClick={this.callStrike} hit={this.resetDetails} foul={this.callFoul}/>
+
+            <Game>
+                <Display strike={this.state.strike} ball={this.state.ball}/>
+                <Dashboard ballClick={this.callBall} strikeClick={this.callStrike} hit={this.resetDetails} foul={this.callFoul}/>
+            </Game>
         </div>
     )
 }
